@@ -6,7 +6,7 @@ Chocolatey doit être installé avant l'exécution de ce script : https://chocol
 choco upgrade all
 
 # Installation des logiciels souhaités (personnalisez la liste comme vous le souhaitez)
-choco install brave discord everything firefox foxitreader lghub nordvpn notion obs-studio paint.net path-copy-copy putty rdm sharex steam tidal ubisoft-connect
+choco install 7zip brave discord everything firefox nilesoft-shell nordvpn notion paint.net putty rdm sharex steam tidal ubisoft-connect veracrypt virtualbox vlc vscode winscp
 
 # Blocage de l'exécution des prochains scripts
 Set-ExecutionPolicy Restricted
