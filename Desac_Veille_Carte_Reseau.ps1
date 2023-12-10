@@ -1,0 +1,1 @@
+Get-WmiObject -Namespace root\wmi -Class MSPower_DeviceEnable | where {$_.InstanceName -match "PCI"} | Set-WmiInstance -Arguments @{Enable = "False"}
