@@ -6,7 +6,7 @@ Chocolatey doit être installé avant l'exécution de ce script : https://chocol
 choco upgrade all
 
 # Installation des logiciels souhaités (personnalisez la liste comme vous le souhaitez)
-choco install 7zip autoruns discord everything nilesoft-shell notion paint.net protondrive protonvpn putty rdm sharex steam tidal ubisoft-connect veracrypt virtualbox vlc vscode winscp
+choco install 7zip autoruns discord everything nilesoft-shell notion paint.net protonvpn putty sharex steam tidal veracrypt virtualbox vlc vscode winscp
 
 # Blocage de l'exécution des prochains scripts
 Set-ExecutionPolicy Restricted
