@@ -1,5 +1,6 @@
-# Connexion à Microsoft 365
+# Connexion à Microsoft 365 et Azure
 Connect-MsolService
+Connect-AzureAD
 
 # Recherche des comptes Azure Active Directory
 Write-Host "Recherche des comptes Azure Active Directory..."
@@ -7,6 +8,7 @@ $Users = Get-MsolUser -All | Where-Object { $_.UserType -ne "Guest" }
 $Report = [System.Collections.Generic.List[Object]]::new() # Création du rapport
 Write-Host "Processing" $Users.Count "accounts..." 
 ForEach ($User in $Users) {
+    $ADUser = Get-AzureADUser -ObjectId $User.ObjectId
 
     $MFADefaultMethod = ($User.StrongAuthenticationMethods | Where-Object { $_.IsDefault -eq "True" }).MethodType
     $MFAPhoneNumber = $User.StrongAuthenticationUserDetails.PhoneNumber
@@ -34,6 +36,7 @@ ForEach ($User in $Users) {
     $ReportLine = [PSCustomObject] @{
         UserPrincipalName = $User.UserPrincipalName
         City              = $User.City
+        CompanyName       = $ADUser.CompanyName
         Country           = $User.Country
         DisplayName       = $User.DisplayName
         Department        = $User.Department
@@ -48,5 +51,5 @@ ForEach ($User in $Users) {
 
 # Génération du rapport csv
 Write-Host "Le rapport est dans le dossier des telechargements"
-$Report | Select-Object UserPrincipalName, DisplayName, City, Country, Department, MFAState, MFADefaultMethod, MFAPhoneNumber, MobilePhone | Sort-Object UserPrincipalName | Out-GridView
+$Report | Select-Object UserPrincipalName, DisplayName, City, CompanyName, Country, Department, MFAState, MFADefaultMethod, MFAPhoneNumber, MobilePhone | Sort-Object UserPrincipalName | Out-GridView
 $Report | Sort-Object UserPrincipalName | Export-CSV -Encoding UTF8 -NoTypeInformation C:\Users\$env:UserName\Downloads\MFAUsers.csv
