@@ -4,7 +4,7 @@ Connect-AzureAD
 
 # Recherche des comptes Azure Active Directory
 Write-Host "Recherche des comptes Azure Active Directory..."
-$Users = Get-MsolUser -All | Where-Object { $_.UserType -ne "Guest" }
+$Users = Get-MsolUser -All | Where-Object { $_.UserType -eq "Member" }
 $Report = [System.Collections.Generic.List[Object]]::new() # Création du rapport
 Write-Host "Processing" $Users.Count "accounts..." 
 ForEach ($User in $Users) {
