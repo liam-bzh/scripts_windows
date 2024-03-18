@@ -1,3 +1,7 @@
+# Installation des modules PowerShell nécessaires
+Install-Module MSOnline
+Install-Module AzureAD
+
 # Connexion à Microsoft 365 et Azure
 Connect-MsolService
 Connect-AzureAD
